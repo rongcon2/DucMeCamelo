@@ -1,0 +1,347 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title id="tabtitle">ĐỨC MẸ CA MÊ LÔ</title>
+        <meta charset="utf-8">
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+        <script type="text/javascript" src="http://ducme-camelo.rhcloud.com/js/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="http://ducme-camelo.rhcloud.com/js/knockout-3.3.0.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://rongphp-rongforeverphpav.rhcloud.com/jssor.css">
+        <link rel="stylesheet" type="text/css" href="http://ducme-camelo.rhcloud.com/css/Paging.css">
+        <script type="text/javascript" src="https://rongphp-rongforeverphpav.rhcloud.com/js/jssor.js"></script>
+        <script type="text/javascript" src="https://rongphp-rongforeverphpav.rhcloud.com/js/jssor.slider.js"></script>
+        <script type="text/javascript" src="http://ducme-camelo.rhcloud.com/js/dmcquery-1.0.js">
+            // http://ducme-camelo.rhcloud.com
+        </script>
+
+        <style type="text/css">
+            body {  
+                background: #CDBB79;
+                line-height: 1;
+                width:100%; 
+                height:100%;
+                margin:0; padding:0; border:0;
+                overflow-x: hidden;
+            } 
+            html, body, div, span, applet, object, iframe,
+            h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+            a, abbr, acronym, address, big, cite, code,
+            del, dfn, em, img, ins, kbd, q, s, samp,
+            small, strike, strong, sub, sup, tt, var,
+            b, u, i, center,
+            dl, dt, dd, ol, ul, li,
+            fieldset, form, label, legend,
+            table, caption, tbody, tfoot, thead, tr, th, td,
+            article, aside, canvas, details, embed, 
+            figure, figcaption, footer, header, hgroup, 
+            menu, nav, output, ruby, section, summary,
+            time, mark, audio, video {
+                margin: 0;
+                padding: 1px;
+                border: 0;
+                font-size: 100%;
+                font: inherit;
+                vertical-align: baseline;
+            }
+            /* HTML5 display-role reset for older browsers */
+            article, aside, details, figcaption, figure, 
+            footer, header, hgroup, menu, nav, section {
+                display: block;
+            }
+            a { font-size:16px; color:#7FFFD4; font-family:times new roman,times; }
+            button {
+                background: #414141;
+                color: #7FFFD4;
+            }
+            button:hover {
+                background: #7FFFD4;
+                color: black;
+            }
+            font { color: #7FFFD4; }
+            span { color: black; }
+
+            p { font-size:16px; color:black; font-family:times new roman,times;}
+
+            p.bannertitle { left:0; top:50px; z-index:20; font-size:30px; color:#20B2AA; font-family:times new roman,times;}
+
+            .centerbutton { 
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                color:#FFD700; 
+                background-color:#525564;
+                width: 150px;
+                height: 30px;
+                border: 3px outset lightgray;
+            }
+            a.prevnext:hover {
+                cursor: pointer;
+            }
+            input:hover {
+                background: #06425C;
+                color: #7FFFD4;
+                cursor: pointer;
+            }
+            div.fb-share, div.twitter-share, div.linkedin-share { display: none; }
+
+            /* ALL BELOW IS FOR TABLE */
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                text-align: center;
+            }
+            table caption { 
+                color: #7FFFD4;
+                background: #0f2d2e; 
+            }
+            th, td {
+                padding: 5px;
+            }
+            th { /* Column header */
+                background:#414141;
+                text-align: center;
+            }
+            th.sortable
+            {
+                color: #FFD700;
+                cursor: pointer;
+                text-decoration: underline;
+            }
+            th.sortable:hover
+            {
+                background: #0f2d2e;
+                color: #7FFFD4;
+            }
+            th.sorted-asc, th.sorted-desc
+            {
+                color: #7FFFD4;
+            }
+            tr.members:hover
+            { 
+                background: darkkhaki;
+            }
+            /* MNEU DROPDOWN FUNCTIONALITY*/
+            ul { 
+                padding:1; 
+                margin:0
+            }
+            a {
+                display:block;
+                text-decoration: none;
+            }
+            li {
+                display:block; 
+                float:left;
+                padding: 1px 5px; /* vertical and horz spacing */
+            }
+            li ul li {
+                float:none;
+            }
+            li ul {
+                display:none; 
+                position:absolute; 
+                z-index:1
+            }
+            li:hover ul {
+                display:block;
+            }
+
+            /* Menu Dropdown */
+            ul#menu, ul#menu ul.sub-menu {
+                padding:0;
+                margin: 0;
+            }
+            ul#menu li, ul#menu ul.sub-menu li {
+                list-style-type: none;
+                display: inline-block;
+            }
+            /*Link Appearance*/
+            ul#menu li a, ul#menu li ul.sub-menu li a {
+                text-decoration: none;
+                color:#FFD700; 
+                background-color:#525564;/*414141;*/
+                border: 3px outset lightgray;
+                padding: 5px;
+                display:inline-block;
+                cursor: pointer;
+                width:150px;
+                text-align: center;
+            }
+            /*Make the parent of sub-menu relative*/
+            ul#menu li {
+                position: relative;
+            }
+            /*sub menu*/
+            ul#menu li ul.sub-menu {
+                display:none;
+                position: absolute;
+                top: 34px;
+                left: 0;
+            }
+            ul#menu li ul.sub-menu a {
+                width:150px;
+            }
+            ul#menu li:hover ul.sub-menu {
+                display:block;
+            }
+            /* Top Nav Background Hover */
+            ul#menu li a:hover {
+                background: #06425C;
+                color: #7FFFD4;
+            }
+            ul#menu li ul li a:hover {
+                background: #06425C;
+                color: #7FFFD4;
+            }
+            /* 3rd level nav */
+            ul#menu li ul.sub-menu li ul {
+                display:none;
+                position: absolute;
+                top: 0px;
+                left: 165px;
+                width: 100px;
+            }
+            /* show the 3rd level when the second is hover */
+            ul#menu li ul.sub-menu li:hover ul {
+                display:block;
+            }
+
+            img.centerIcon { 
+                display: block;
+                margin-left: auto;
+                margin-right: auto; 
+                width:150px;
+                height:150px;
+            }
+            img.centering { 
+                display: block;
+                margin-left: auto;
+                margin-right: auto; 
+                width:590px;
+                height:780px;
+            }
+            img.vietcentering { 
+                display: block;
+                margin-left: auto;
+                margin-right: auto; 
+                width:590px;
+                height:755px;
+            }
+            /* Menu Dropdown */  
+            div.introContent{ margin-left:20px; float:left; overflow-y: hidden; width:810px; height:990px; background: #F2F2F2;}  
+            div.readingContent{ margin-left:20px; float:left; overflow-y: scroll; width:800px; height:890px; background: #F2F2F2; color: black;}
+            div.readingContent2{ margin-left:20px; float:left; overflow-y: hidden; width:800px; height:890px; background: #F2F2F2; color: black;}
+            div.mapContent{ margin-left:20px; float:left; overflow-y: scroll; width:830px; height:930px; background: #F2F2F2; color: black;}  
+            div.email{ margin-left:20px; float:left; overflow-y: hidden; width:810px; height:930px; background: #F2F2F2;}  
+
+            div.nhac .box_bg_album{left:402px;top:102px; position:absolute; z-index:19;}
+            div.nhac .box_tag_album{left:412px;top:100px;  position:absolute; z-index:18;}
+            div.nhac .rotate_album{left:518px; top:110px; position:absolute; z-index:17;}
+            select.nhaclist {
+                text-align:left; top:104px; left:30px; width:370px; height:316px;
+            }
+            select.monthbox {
+                left:150px;
+                top:75px;
+                border-style:inset;
+                border-width: 2px;
+                background-color: lightyellow;
+                color:black;
+            }
+            select.monthbox:hover {
+                cursor: pointer;
+                background-color: #CCFFCC;
+            }
+            div.main {  // make sure main infherit body window size
+                        width: inherit;
+                        height: inherit;
+                        margin: 0;
+                        padding: 0;
+            } 
+            /* Paging bottoming and centering ul */
+            div.paging {
+                position:fixed; 
+                bottom:0px;
+                left:32%;
+            }
+            div.paging ul {  
+                left:32%;
+            }
+            div.mainpageUL {
+                width: inherit;
+                position:fixed;
+                left:17%;
+            }
+            div.mainpageUL ul {  
+                left:17%;
+            }
+            div.vietmainpageUL {
+                width: inherit;
+                position:fixed;
+                left:7%;
+            }
+            div.vietmainpageUL ul {  
+                left:7%;
+            }
+
+            /* FULL CALENDAR */
+            div.fullcaldiv {
+                width:850px;
+                height:690px;
+                border-style:inset; 
+                background-color:#bbbb77;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="main">         
+            <div class="introContent">
+                <img src="https://ducme-camelo.rhcloud.com/img/banner.jpg" width="780px" height="250px">
+                <p style="color:black" class="bannertitle" data-bind="valueWithInit: { text: 'title' }">ĐỨC MẸ CA MÊ LÔ</p><br>
+                <div>
+                    <p style="color:black" data-bind="valueWithInit: { text: 'selection' }">Please click on the option box below to select your viewing language (Default Vietnamese)</p><br>
+                    <select id="langBox" style="left:30px;color:black;background:#7FFFD4;border-width: 2px;border-style:inset;" data-bind="options: Languagelist,value:Language"></select>
+                </div>
+                <br><br>
+                <div>
+                    <p style="color:black" data-bind="valueWithInit: { text: 'greeting' }">Kính chào quí khán giả,</p><br>
+                    <p style="color:black" data-bind="valueWithInit: { text: 'welcome1' }">Xin chào mừng đến trang web của chúng tôi đễ
+                        nghe tin mừng phước lành của Mẹ Maria Núi Ca mê lô và Ơn Cứu Độ của con Mẹ. Mời bạn vào truy cập tìm hiễu và chúc 
+                        quí bạn và gia đình luôn được nhiều hồng ân của Mẹ Maria luôn mãi và được nhiều an ũi trong những ngày phút cuối 
+                        của cuộc sống. Chúng tôi mời các bạn nhìn xung quanh và nhận được một cảm giác về trang web của chúng tôi. Hãy 
+                        chia sẻ bất kỳ ý kiến hoặc câu hỏi có thể có trong tâm trí của bạn thông qua cuốn sách khách trực tuyến của 
+                        chúng tôi. Nếu bạn hiện chưa phải là thành viên của nhóm của chúng tôi. Chúng tôi muốn nhân cơ hội này để mời 
+                        bạn đến một trong những dịch vụ hàng tuần của chúng tôi. Và tất nhiên, cảm thấy tự do để tiếp cận và gọi một 
+                        trong những mục tử hoặc Bộ Leaders của chúng tôi.</p><br>
+                    <p style="color:black" data-bind="valueWithInit: { text: 'welcome2' }">Chúng tôi hy vọng bạn và gia đình bạn sẽ có một trải nghiệm ấm áp và tinh thần đầy với chúng 
+                        tôi khi chúng ta thờ phượng và mối tương giao với nhau tại các dịch vụ, các sự kiện của chúng tôi, và các bộ.</p><br>
+                    <p style="color:black" data-bind="valueWithInit: { text: 'welcome3' }">Chúng tôi cũng muốn mời bạn thực hiện một yêu cầu cầu nguyện trực tuyến. Yêu cầu cầu nguyện 
+                        của bạn sẽ mở cửa ra, và Đức Chúa Trời đang kiên nhẫn chờ đợi ở phía bên kia cánh cửa đó, mọi lúc, trong mọi tình 
+                        huống, để tham gia với bạn.</p><br>
+                    <p style="color:black" data-bind="valueWithInit: { text: 'closing' }">Nhiều phước lành cho bạn,</p><br>
+                    <p style="color:black" data-bind="valueWithInit: { text: 'signature' }">Gia Đình Quang, Tuyền & Mỹ Thanh Nguyễn</p>
+                    <p style="color:black" data-bind="valueWithInit: { text: 'email' }">Email: songdepmecamelo@gmail.com</p>
+                    <br>
+                    <input class="centerbutton" type="button" onclick="processMenu('main')" value="Nhập Site" id="Enter"></input>                    
+                    <br><br><p style="color:black" data-bind="valueWithInit: { text: 'disclaim' }">Không Nhận: (Needs Quang's Viet statement here)</p>
+                </div>
+            </div>
+        </div>
+        <!-- DC Pagination:A1 End -->
+    </body>
+    <script>
+        window.onload = Check('votrang');
+        var vm = new AppViewModel();
+        ko.applyBindings(vm);
+        window.onload = Check();
+        setEnv('view', 'CAMELO-MEMBERS', 'none');
+    </script>
+
+    <link href='./css/fullcalendar.css' rel='stylesheet' />
+    <link href='./css/fullcalendar.print.css' rel='stylesheet' media='print' />
+    <script type="text/javascript" src='./js/moment.min.js'></script>
+    <script type="text/javascript" src='./js/jquery.min.js'></script>
+    <script type="text/javascript" src='./js/fullcalendar.min.js'></script>
+    <script type="text/javascript" src='./js/fullcal.query.min.js'></script>
+    <script type="text/javascript" src='./js/lang-all.js'></script>
+</html>

@@ -1,0 +1,155 @@
+<html>
+    <head> 
+        <title id="tabtitle">CAMÊLÔ Member and Calendar Manager</title>
+        <meta charset="utf-8">
+        <script type="text/javascript" src="http://ducme-camelo.rhcloud.com/js/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="./js/dmcdbquery-1.0.js"></script>
+        <script type="text/javascript" src="./js/dmcdbcalquery-1.0.js">
+            // http://ducme-camelo.rhcloud.com/
+        </script>
+        <style>
+            body {
+                color: black;
+                background: #CDBB79;
+            }
+            /* ALL BELOW IS FOR TABLE */
+            #table{
+                width:100%;
+                max-width:1600px;
+            }
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                text-align: center;
+            }
+            table caption { 
+                color: #7FFFD4;
+                background: #0f2d2e;  
+            }
+            th {
+                height:30px;
+                background-repeat:no-repeat;
+                background:#414141;
+                text-align: center;   
+            }
+            th.sortable
+            {
+                color: #FFD700;
+                cursor: pointer;
+                text-decoration: underline;
+            }
+            th.sortable:hover
+            {
+                background: #0f2d2e;
+                color: #7FFFD4;
+            }
+            th.sorted-asc, th.sorted-desc
+            { 
+                color: #7FFFD4;
+            }
+            button:hover
+            { 
+                background: #06425C; 
+                color: #7FFFD4;
+            }
+            tr.members:hover
+            { 
+                background: darkkhaki;
+            }
+            /* CALENDAR */
+            div.fullcaldiv {
+                width:800px;
+                width:800px;
+                border-style:inset; 
+                background-color:lightyellow;
+            }
+            div.container {
+                margin: 15px;   
+            }
+            div.calendar, div.textareas {
+                float: left;
+                padding: 10px;    
+            }
+            div.calendar {
+                background-color:#CDBB79; 
+                height:600px;
+            }
+            div.textareas {
+                width:620px;
+                background-color: #CDBB79; 
+                height:600px;    
+            }
+            div.membertable {
+                width:1000px;
+                height:600px;
+                overflow-y: scroll;
+            }
+            p.textwrap {
+                width:900px;
+                word-wrap: break-word;
+                background: #CDBB79; 
+            }
+            p.textwrap2 {
+                width:600px;
+                word-wrap: break-word;
+                background-color: #CDBB79;    
+            }
+
+            table {
+                background-color: lightgoldenrodyellow;
+            }
+            select.monyr {
+                border-style:inset;
+                background-color: thistle;
+            }
+            textarea.caltext {
+                width:600px;
+                border-style:inset;
+                color:black; 
+                background-color:lightyellow;
+            }
+            td.today {
+                background-color: gold;
+            }
+            input.edit {
+                background-color: lightcyan;
+            }
+            input.today {
+                border-style:inset;
+                background-color: gold;
+            }
+            input.activity {
+                background-color: darkseagreen;
+            }
+            select:hover {
+                cursor: pointer;
+                background-color: lightsalmon;
+            }
+            input:hover {
+                cursor: pointer;
+                background-color: lightsalmon;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="chkVidPswd">
+            <div style="margin:10px;clear:both;">
+                <p>Please enter password.</p>
+                <input type="password" id="myPsw" value="">
+                <button onclick="Check('login')">Submit</button><br /><br />     
+                <div id="psswdVidMsg"></div>     
+            </div>
+        </div>
+        <script>
+            window.onload = Check('votrang');
+            document.onkeydown = KeyPress;
+            var htmlFile = "";
+            function KeyPress(e) {
+                var evtobj = window.event ? event : e;
+                if (evtobj.keyCode === 13) { // Enter
+                    Check('login');
+                }
+            }
+        </script>
+    </body>
+</html>
